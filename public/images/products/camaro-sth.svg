@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#1a1a2e"/>
+  <rect x="20" y="20" width="360" height="260" rx="8" fill="#1a1a00"/>
+  <path d="M80 190 L90 125 L120 100 L280 100 L310 125 L320 190 Z" fill="#ffd700" stroke="#ffab00" stroke-width="2"/>
+  <path d="M120 100 L180 65 L220 65 L280 100 Z" fill="#ffc107" stroke="#ffab00" stroke-width="1.5"/>
+  <path d="M125 105 L175 73 L215 73 L270 105 Z" fill="#fff8e1" opacity="0.4"/>
+  <circle cx="130" cy="190" r="22" fill="#111" stroke="#333" stroke-width="3"/>
+  <circle cx="130" cy="190" r="10" fill="#888"/>
+  <circle cx="270" cy="190" r="22" fill="#111" stroke="#333" stroke-width="3"/>
+  <circle cx="270" cy="190" r="10" fill="#888"/>
+  <circle cx="310" cy="140" r="6" fill="#ffd700"/>
+  <circle cx="90" cy="140" r="5" fill="#fff" opacity="0.8"/>
+  <rect x="78" y="135" width="12" height="20" rx="3" fill="#ff3d00"/>
+  <text x="200" y="245" text-anchor="middle" fill="#ffd700" font-family="Arial" font-size="10" font-weight="bold" letter-spacing="1">'18 CAMARO SS</text>
+  <text x="200" y="260" text-anchor="middle" fill="#ffab00" font-family="Arial" font-size="8" letter-spacing="2">SUPER TREASURE HUNT</text>
+</svg>

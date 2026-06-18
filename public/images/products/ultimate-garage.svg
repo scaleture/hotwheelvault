@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#1a1a2e"/>
+  <rect x="20" y="20" width="360" height="260" rx="8" fill="#1a1a2e"/>
+  <!-- Garage building -->
+  <rect x="60" y="60" width="280" height="150" rx="4" fill="#2a2a3e" stroke="#ff3d00" stroke-width="2"/>
+  <!-- Garage door -->
+  <rect x="100" y="120" width="80" height="90" rx="2" fill="#0a0a1e" stroke="#333" stroke-width="2"/>
+  <line x1="140" y1="120" x2="140" y2="210" stroke="#333" stroke-width="1"/>
+  <rect x="220" y="120" width="80" height="90" rx="2" fill="#0a0a1e" stroke="#333" stroke-width="2"/>
+  <line x1="260" y1="120" x2="260" y2="210" stroke="#333" stroke-width="1"/>
+  <!-- Roof -->
+  <polygon points="50,60 200,20 350,60" fill="#3a3a5e" stroke="#ff3d00" stroke-width="2"/>
+  <!-- Car inside -->
+  <rect x="110" y="175" width="60" height="25" rx="5" fill="#ff3d00"/>
+  <rect x="230" y="175" width="60" height="25" rx="5" fill="#ffd700"/>
+  <!-- Window -->
+  <rect x="100" y="65" width="60" height="40" rx="2" fill="#87ceeb" opacity="0.3"/>
+  <text x="200" y="255" text-anchor="middle" fill="#ff3d00" font-family="Arial" font-size="10" font-weight="bold" letter-spacing="1">ULTIMATE GARAGE</text>
+</svg>

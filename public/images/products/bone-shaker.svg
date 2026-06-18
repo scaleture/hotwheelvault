@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#1a1a2e"/>
+  <rect x="20" y="20" width="360" height="260" rx="8" fill="#16213e"/>
+  <!-- Car body -->
+  <path d="M80 190 L90 130 L120 100 L280 100 L310 130 L320 190 Z" fill="#e94560" stroke="#ffd700" stroke-width="2"/>
+  <path d="M120 100 L180 60 L220 60 L280 100 Z" fill="#0f3460" stroke="#ffd700" stroke-width="1.5"/>
+  <!-- Windows -->
+  <path d="M125 105 L175 68 L215 68 L270 105 Z" fill="#87ceeb" opacity="0.6"/>
+  <!-- Wheels -->
+  <circle cx="130" cy="190" r="22" fill="#111" stroke="#333" stroke-width="3"/>
+  <circle cx="130" cy="190" r="10" fill="#888"/>
+  <circle cx="270" cy="190" r="22" fill="#111" stroke="#333" stroke-width="3"/>
+  <circle cx="270" cy="190" r="10" fill="#888"/>
+  <!-- Headlights -->
+  <circle cx="310" cy="140" r="6" fill="#ffd700"/>
+  <circle cx="90" cy="140" r="5" fill="#fff" opacity="0.8"/>
+  <!-- Tail -->
+  <rect x="78" y="135" width="12" height="20" rx="3" fill="#ff3d00"/>
+  <!-- Stripes -->
+  <line x1="160" y1="130" x2="240" y2="130" stroke="#ffd700" stroke-width="2" opacity="0.5"/>
+  <line x1="160" y1="140" x2="200" y2="140" stroke="#fff" stroke-width="1" opacity="0.3"/>
+  <!-- Text -->
+  <text x="200" y="255" text-anchor="middle" fill="#ffd700" font-family="Arial, sans-serif" font-size="12" font-weight="bold" letter-spacing="2">BONE SHAKER</text>
+</svg>

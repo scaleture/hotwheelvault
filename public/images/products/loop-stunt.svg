@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#1a1a2e"/>
+  <rect x="20" y="20" width="360" height="260" rx="8" fill="#0d1b2a"/>
+  <!-- Track loop -->
+  <circle cx="200" cy="140" r="65" fill="none" stroke="#ff3d00" stroke-width="8"/>
+  <circle cx="200" cy="140" r="57" fill="none" stroke="#ff6d00" stroke-width="3"/>
+  <!-- Launch ramp -->
+  <path d="M80 210 L140 150" stroke="#ff3d00" stroke-width="8" stroke-linecap="round"/>
+  <path d="M320 210 L260 150" stroke="#ff3d00" stroke-width="8" stroke-linecap="round"/>
+  <!-- Car on track -->
+  <rect x="185" y="105" width="30" height="12" rx="3" fill="#ffd700" transform="rotate(-45 200 111)"/>
+  <circle cx="190" cy="117" r="4" fill="#111" transform="rotate(-45 200 111)"/>
+  <circle cx="210" cy="117" r="4" fill="#111" transform="rotate(-45 200 111)"/>
+  <!-- Speed lines -->
+  <line x1="140" y1="80" x2="120" y2="60" stroke="#fff" stroke-width="2" opacity="0.3"/>
+  <line x1="150" y1="70" x2="135" y2="50" stroke="#fff" stroke-width="2" opacity="0.2"/>
+  <line x1="260" y1="80" x2="280" y2="60" stroke="#fff" stroke-width="2" opacity="0.3"/>
+  <line x1="250" y1="70" x2="265" y2="50" stroke="#fff" stroke-width="2" opacity="0.2"/>
+  <!-- Base -->
+  <rect x="60" y="205" width="280" height="8" rx="4" fill="#2a2a3e"/>
+  <text x="200" y="255" text-anchor="middle" fill="#ff6d00" font-family="Arial" font-size="10" font-weight="bold" letter-spacing="1">LOOP STUNT CHAMPION</text>
+</svg>

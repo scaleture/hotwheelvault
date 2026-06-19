@@ -16,6 +16,7 @@ interface CartStore {
   addItem: (item: Omit<CartItem, 'qty'>) => void
   removeItem: (id: string) => void
   updateQty: (id: string, qty: number) => void
+  clearCart: () => void
   toggleCart: () => void
   closeCart: () => void
   totalItems: () => number
@@ -46,6 +47,7 @@ export const useCartStore = create<CartStore>()(
           ? state.items.filter(i => i.id !== id)
           : state.items.map(i => i.id === id ? { ...i, qty } : i)
       })),
+      clearCart: () => set({ items: [] }),
       toggleCart: () => set(state => ({ isOpen: !state.isOpen })),
       closeCart: () => set({ isOpen: false }),
       totalItems: () => get().items.reduce((sum, i) => sum + i.qty, 0),

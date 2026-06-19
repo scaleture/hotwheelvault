@@ -3,9 +3,13 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useCartStore } from '@/store/cartStore'
+import { useAuthStore } from '@/store/authStore'
+import { useUIStore } from '@/store/uiStore'
 
 export default function CartSidebar() {
   const router = useRouter()
+  const user = useAuthStore(s => s.user)
+  const openAuthModal = useUIStore(s => s.openAuthModal)
   const { items, isOpen, closeCart, removeItem, updateQty, totalPrice } = useCartStore()
 
   return (
@@ -124,7 +128,7 @@ export default function CartSidebar() {
                   </span>
                 </div>
                 <button
-                  onClick={() => { closeCart(); router.push('/checkout') }}
+                  onClick={() => { closeCart(); user ? router.push('/checkout') : openAuthModal() }}
                   className="w-full bg-[#FF3D00] text-white py-4 
                   font-['Bebas_Neue'] text-xl tracking-[3px] hover:bg-[#FF5500] 
                   transition-all hover:-translate-y-1 active:scale-95">

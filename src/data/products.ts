@@ -9,4 +9,10 @@ export interface Product {
   section: 'featured' | 'track-sets'
   sortOrder: number
   image: string
+  description?: string
+  highlights?: string[]
+  images?: string[]
+  specs?: Record<string, string>
+  stock?: number
+  isPublished?: boolean
 }

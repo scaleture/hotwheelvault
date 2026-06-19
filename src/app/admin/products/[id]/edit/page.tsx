@@ -30,6 +30,12 @@ export default async function EditProductPage({ params }: Props) {
     section: data.section,
     sortOrder: data.sort_order,
     image: data.image_url,
+    description: data.description ?? undefined,
+    highlights: data.highlights ?? undefined,
+    images: data.images ?? undefined,
+    specs: data.specs ?? undefined,
+    stock: data.stock ?? undefined,
+    isPublished: data.is_published ?? undefined,
   }
 
   return (

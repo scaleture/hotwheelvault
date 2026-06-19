@@ -17,6 +17,12 @@ export async function PATCH(request: Request, { params }: { params: { id: string
       section: body.section,
       sort_order: body.sortOrder,
       image_url: body.image,
+      description: body.description ?? null,
+      highlights: body.highlights ?? [],
+      images: body.images ?? [],
+      specs: body.specs ?? {},
+      stock: body.stock ?? 99,
+      is_published: body.isPublished ?? true,
     }
     console.log('Updating product with image_url:', updatePayload.image_url)
 

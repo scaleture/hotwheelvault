@@ -1,18 +1,70 @@
 'use client'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { supabaseBrowser } from '@/lib/supabase-browser'
 import { useUIStore } from '@/store/uiStore'
 
+type Tab = 'signin' | 'signup'
+
 export default function AuthModal() {
   const { authModalOpen, closeAuthModal } = useUIStore()
+  const [tab, setTab] = useState<Tab>('signin')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirm, setConfirm] = useState('')
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [magicSent, setMagicSent] = useState(false)
 
-  async function handleGoogleSignIn() {
-    await supabaseBrowser.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: window.location.origin + '/auth/callback',
-      },
-    })
+  async function handleSignIn(e: React.FormEvent) {
+    e.preventDefault()
+    setError('')
+    setLoading(true)
+
+    const { error: err } = await supabaseBrowser.auth.signInWithPassword({ email, password })
+    if (err) {
+      setError(err.message === 'Invalid login credentials'
+        ? 'Wrong email or password'
+        : err.message)
+    } else {
+      closeAuthModal()
+    }
+    setLoading(false)
+  }
+
+  async function handleSignUp(e: React.FormEvent) {
+    e.preventDefault()
+    setError('')
+    if (password !== confirm) { setError('Passwords do not match'); return }
+    if (password.length < 6) { setError('Password must be at least 6 characters'); return }
+
+    setLoading(true)
+    const { error: err } = await supabaseBrowser.auth.signUp({ email, password })
+    if (err) {
+      setError(err.message === 'User already registered'
+        ? 'An account with this email already exists. Sign in instead.'
+        : err.message)
+    } else {
+      setTab('signin')
+      setPassword('')
+      setConfirm('')
+      setError('Check your email for a confirmation link, then sign in.')
+    }
+    setLoading(false)
+  }
+
+  async function handleMagicLink() {
+    if (!email) { setError('Enter your email first'); return }
+    setError('')
+    setLoading(true)
+
+    const { error: err } = await supabaseBrowser.auth.signInWithOtp({ email })
+    if (err) {
+      setError(err.message)
+    } else {
+      setMagicSent(true)
+    }
+    setLoading(false)
   }
 
   return (
@@ -40,35 +92,108 @@ export default function AuthModal() {
                 ✕
               </button>
 
-              <div className="text-center mb-8">
+              <div className="text-center mb-6">
                 <h2 className="font-['Bebas_Neue'] text-3xl text-[#1A1A1A] mb-2">
-                  SIGN IN TO <span className="text-[#FF3D00]">HOTWHEEL</span> VAULT
+                  {tab === 'signin' ? 'SIGN IN' : 'SIGN UP'}
                 </h2>
                 <p className="text-gray-400 text-xs tracking-wide">
-                  Sign in to track orders, save addresses, and checkout faster
+                  {tab === 'signin' ? 'Track orders, save addresses, checkout faster' : 'Create your account'}
                 </p>
               </div>
 
-              <button
-                onClick={handleGoogleSignIn}
-                className="w-full flex items-center justify-center gap-3 bg-white border-2 
-                  border-gray-200 hover:border-[#FF3D00]/40 hover:bg-gray-50 
-                  transition-all px-6 py-3.5"
-              >
-                <svg viewBox="0 0 24 24" className="w-5 h-5 flex-shrink-0">
-                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" />
-                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-                </svg>
-                <span className="text-sm font-bold text-[#1A1A1A] tracking-wider font-['Barlow_Condensed']">
-                  Continue with Google
-                </span>
-              </button>
+              {/* Tabs */}
+              <div className="flex border-b border-gray-200 mb-6">
+                <button
+                  onClick={() => { setTab('signin'); setError('') }}
+                  className={`flex-1 pb-3 text-sm font-bold font-['Barlow_Condensed'] tracking-widest uppercase transition-colors
+                    ${tab === 'signin' ? 'text-[#FF3D00] border-b-2 border-[#FF3D00]' : 'text-gray-400 hover:text-gray-600'}`}
+                >
+                  Sign In
+                </button>
+                <button
+                  onClick={() => { setTab('signup'); setError('') }}
+                  className={`flex-1 pb-3 text-sm font-bold font-['Barlow_Condensed'] tracking-widest uppercase transition-colors
+                    ${tab === 'signup' ? 'text-[#FF3D00] border-b-2 border-[#FF3D00]' : 'text-gray-400 hover:text-gray-600'}`}
+                >
+                  Sign Up
+                </button>
+              </div>
+
+              {magicSent ? (
+                <div className="text-center py-6">
+                  <span className="text-4xl block mb-4">📬</span>
+                  <p className="text-gray-600 text-sm mb-2">Magic link sent!</p>
+                  <p className="text-gray-400 text-xs">Check your email ({email}) for the sign-in link.</p>
+                  <button
+                    onClick={() => setMagicSent(false)}
+                    className="mt-6 text-sm text-[#FF3D00] font-bold hover:underline"
+                  >
+                    Back to sign in
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={tab === 'signin' ? handleSignIn : handleSignUp}>
+                  <div className="space-y-4">
+                    <input
+                      type="email"
+                      placeholder="Email address"
+                      value={email}
+                      onChange={e => setEmail(e.target.value)}
+                      required
+                      className="w-full px-4 py-3 text-sm border border-gray-200 focus:border-[#FF3D00] outline-none transition-colors bg-gray-50/50"
+                    />
+                    <input
+                      type="password"
+                      placeholder="Password"
+                      value={password}
+                      onChange={e => setPassword(e.target.value)}
+                      required
+                      minLength={6}
+                      className="w-full px-4 py-3 text-sm border border-gray-200 focus:border-[#FF3D00] outline-none transition-colors bg-gray-50/50"
+                    />
+                    {tab === 'signup' && (
+                      <input
+                        type="password"
+                        placeholder="Confirm password"
+                        value={confirm}
+                        onChange={e => setConfirm(e.target.value)}
+                        required
+                        minLength={6}
+                        className="w-full px-4 py-3 text-sm border border-gray-200 focus:border-[#FF3D00] outline-none transition-colors bg-gray-50/50"
+                      />
+                    )}
+                  </div>
+
+                  {error && (
+                    <p className={`mt-4 text-xs ${error.includes('Check your email') ? 'text-green-600' : 'text-red-500'}`}>
+                      {error}
+                    </p>
+                  )}
+
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full mt-5 bg-[#FF3D00] text-white py-3 text-sm font-bold font-['Barlow_Condensed']
+                      tracking-widest uppercase hover:bg-[#E03600] transition-colors disabled:opacity-50"
+                  >
+                    {loading ? (tab === 'signin' ? 'SIGNING IN...' : 'CREATING ACCOUNT...') : (tab === 'signin' ? 'SIGN IN' : 'CREATE ACCOUNT')}
+                  </button>
+
+                  {tab === 'signin' && (
+                    <button
+                      type="button"
+                      onClick={handleMagicLink}
+                      disabled={loading}
+                      className="w-full mt-3 text-xs text-gray-400 hover:text-[#FF3D00] transition-colors underline underline-offset-2 disabled:opacity-50"
+                    >
+                      Send magic link instead
+                    </button>
+                  )}
+                </form>
+              )}
 
               <p className="text-center text-gray-400 text-[10px] mt-6 leading-relaxed">
-                By signing in, you agree to our Terms of Service and Privacy Policy.
-                We never post without your permission.
+                By continuing, you agree to our Terms of Service and Privacy Policy.
               </p>
             </div>
           </motion.div>

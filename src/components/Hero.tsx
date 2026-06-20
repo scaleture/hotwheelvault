@@ -1,7 +1,10 @@
 'use client'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useCountUp } from '@/hooks/useCountUp'
+import { useAuthStore } from '@/store/authStore'
+import { useUIStore } from '@/store/uiStore'
 
 function AnimatedStat({ target, suffix, label }: { target: number; suffix: string; label: string }) {
   const count = useCountUp(target, 1500)
@@ -20,6 +23,43 @@ function AnimatedStat({ target, suffix, label }: { target: number; suffix: strin
         {display}
       </div>
       <div className="text-[11px] tracking-[2px] uppercase text-gray-400 mt-1">{label}</div>
+    </div>
+  )
+}
+
+function HeroSignInBlock() {
+  const user = useAuthStore(s => s.user)
+  const openAuthModal = useUIStore(s => s.openAuthModal)
+
+  if (user) {
+    return (
+      <Link href="/account/orders"
+        className="bg-[#FF3D00] text-white px-6 py-3 text-sm font-bold font-['Barlow_Condensed']
+          tracking-widest uppercase hover:bg-[#FF5500] transition-all"
+        style={{ clipPath: 'polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%)' }}
+      >
+        MY ACCOUNT →
+      </Link>
+    )
+  }
+
+  return (
+    <div className="flex gap-2">
+      <button
+        onClick={openAuthModal}
+        className="bg-[#FF3D00] text-white px-6 py-3 text-sm font-bold font-['Barlow_Condensed']
+          tracking-widest uppercase hover:bg-[#FF5500] transition-all"
+        style={{ clipPath: 'polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%)' }}
+      >
+        SIGN IN
+      </button>
+      <button
+        onClick={() => { openAuthModal() }}
+        className="border-2 border-[#FF3D00] text-[#FF3D00] px-6 py-3 text-sm font-bold
+          font-['Barlow_Condensed'] tracking-widest uppercase hover:bg-[#FF3D00] hover:text-white transition-all"
+      >
+        SIGN UP
+      </button>
     </div>
   )
 }
@@ -122,6 +162,19 @@ export default function Hero() {
               Delivery
             </div>
           </div>
+        </motion.div>
+
+        {/* Sign In CTA */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.7, delay: 0.7 }}
+          className="mt-8 pt-6 border-t border-gray-200 flex items-center justify-between"
+        >
+          <p className="text-xs text-gray-500 tracking-wide">
+            <span className="text-[#FF3D00] font-bold">★</span> Sign in for faster checkout, order tracking & exclusive drops
+          </p>
+          <HeroSignInBlock />
         </motion.div>
       </div>
 

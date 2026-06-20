@@ -105,7 +105,7 @@ export default function Navbar() {
             <span className={`block w-5 h-[2px] bg-[#1A1A1A] transition-transform duration-300 ${menuOpen ? '-rotate-45 -translate-y-[4px]' : ''}`} />
           </button>
 
-          {hasMounted && !user && (
+          {!user && (
             <button
               onClick={openAuthModal}
               className="text-gray-800 text-sm tracking-[2px] uppercase font-bold mr-2
@@ -116,7 +116,7 @@ export default function Navbar() {
             </button>
           )}
 
-          {hasMounted && user && (
+          {user && (
             <div ref={profileRef} className="relative">
               <button
                 onClick={() => setProfileOpen(!profileOpen)}

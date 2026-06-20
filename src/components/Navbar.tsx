@@ -108,7 +108,7 @@ export default function Navbar() {
           {hasMounted && !user && (
             <button
               onClick={openAuthModal}
-              className="text-gray-800 text-sm tracking-[2px] uppercase font-bold
+              className="text-gray-800 text-sm tracking-[2px] uppercase font-bold mr-2
                 font-['Barlow_Condensed'] px-4 py-2 bg-white/80 backdrop-blur-sm border border-white/40
                 hover:bg-white hover:text-[#FF3D00] hover:border-[#FF3D00]/30 transition-all shadow-sm"
             >

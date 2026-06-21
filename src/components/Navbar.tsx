@@ -91,6 +91,54 @@ export default function Navbar() {
               </a>
             </li>
           ))}
+          <li>
+            {user ? (
+              <div ref={profileRef} className="relative">
+                <button
+                  onClick={() => setProfileOpen(!profileOpen)}
+                  className="text-gray-800 text-sm tracking-[2px] uppercase font-bold
+                    font-['Barlow_Condensed'] px-5 py-3 bg-white/80 backdrop-blur-sm border border-white/40
+                    hover:bg-white hover:text-[#FF3D00] hover:border-[#FF3D00]/30 transition-all shadow-sm"
+                >
+                  {userInitial}
+                </button>
+                <AnimatePresence>
+                  {profileOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -8 }}
+                      className="absolute right-0 top-full mt-2 w-48 bg-white border border-gray-200
+                        shadow-xl z-[200] overflow-hidden"
+                    >
+                      <Link href="/account/orders" onClick={() => setProfileOpen(false)}
+                        className="block px-4 py-3 text-sm text-[#1A1A1A] hover:bg-gray-50 font-['Barlow_Condensed'] uppercase tracking-wider">
+                        My Orders
+                      </Link>
+                      <Link href="/account" onClick={() => setProfileOpen(false)}
+                        className="block px-4 py-3 text-sm text-[#1A1A1A] hover:bg-gray-50 font-['Barlow_Condensed'] uppercase tracking-wider">
+                        My Account
+                      </Link>
+                      <hr className="border-gray-100" />
+                      <button onClick={handleSignOut}
+                        className="w-full text-left px-4 py-3 text-sm text-red-600 hover:bg-red-50 font-['Barlow_Condensed'] uppercase tracking-wider">
+                        Sign Out
+                      </button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ) : (
+              <button
+                onClick={openAuthModal}
+                className="text-gray-800 text-sm tracking-[2px] uppercase font-bold
+                  font-['Barlow_Condensed'] px-5 py-3 bg-white/80 backdrop-blur-sm border border-white/40
+                  hover:bg-white hover:text-[#FF3D00] hover:border-[#FF3D00]/30 transition-all shadow-sm"
+              >
+                SIGN IN
+              </button>
+            )}
+          </li>
         </ul>
 
         <div className="flex items-center gap-2">
@@ -104,65 +152,6 @@ export default function Navbar() {
             <span className={`block w-5 h-[2px] bg-[#1A1A1A] transition-opacity duration-300 ${menuOpen ? 'opacity-0' : ''}`} />
             <span className={`block w-5 h-[2px] bg-[#1A1A1A] transition-transform duration-300 ${menuOpen ? '-rotate-45 -translate-y-[4px]' : ''}`} />
           </button>
-
-          {!user && (
-            <button
-              onClick={openAuthModal}
-              className="text-gray-800 text-sm tracking-[2px] uppercase font-bold mr-2
-                font-['Barlow_Condensed'] px-4 py-2 bg-white/80 backdrop-blur-sm border border-white/40
-                hover:bg-white hover:text-[#FF3D00] hover:border-[#FF3D00]/30 transition-all shadow-sm"
-            >
-              SIGN IN
-            </button>
-          )}
-
-          {user && (
-            <div ref={profileRef} className="relative">
-              <button
-                onClick={() => setProfileOpen(!profileOpen)}
-                className="w-9 h-9 rounded-full bg-[#FF3D00] text-white text-sm font-bold
-                  flex items-center justify-center hover:bg-[#FF5500] transition-all"
-              >
-                {userInitial}
-              </button>
-              <AnimatePresence>
-                {profileOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -8 }}
-                    className="absolute right-0 top-full mt-2 w-48 bg-white border border-gray-200
-                      shadow-xl z-[200] overflow-hidden"
-                  >
-                    <Link
-                      href="/account/orders"
-                      onClick={() => setProfileOpen(false)}
-                      className="block px-4 py-3 text-sm text-[#1A1A1A] hover:bg-gray-50
-                        font-['Barlow_Condensed'] uppercase tracking-wider"
-                    >
-                      My Orders
-                    </Link>
-                    <Link
-                      href="/account"
-                      onClick={() => setProfileOpen(false)}
-                      className="block px-4 py-3 text-sm text-[#1A1A1A] hover:bg-gray-50
-                        font-['Barlow_Condensed'] uppercase tracking-wider"
-                    >
-                      My Account
-                    </Link>
-                    <hr className="border-gray-100" />
-                    <button
-                      onClick={handleSignOut}
-                      className="w-full text-left px-4 py-3 text-sm text-red-600 hover:bg-red-50
-                        font-['Barlow_Condensed'] uppercase tracking-wider"
-                    >
-                      Sign Out
-                    </button>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          )}
 
           <button
             onClick={toggleCart}
@@ -214,7 +203,7 @@ export default function Navbar() {
                   </a>
                 </li>
               ))}
-              {user && (
+              {user ? (
                 <>
                   <li><Link href="/account/orders" onClick={() => setMenuOpen(false)}
                     className="block text-gray-800 text-sm tracking-[2px] uppercase font-bold
@@ -225,6 +214,11 @@ export default function Navbar() {
                       font-['Barlow_Condensed'] px-5 py-3 bg-white/80 backdrop-blur-sm border border-white/40
                       hover:bg-white hover:text-[#FF3D00] transition-all text-center">My Account</Link></li>
                 </>
+              ) : (
+                <li><button onClick={() => { setMenuOpen(false); openAuthModal() }}
+                  className="block w-full text-gray-800 text-sm tracking-[2px] uppercase font-bold
+                    font-['Barlow_Condensed'] px-5 py-3 bg-white/80 backdrop-blur-sm border border-white/40
+                    hover:bg-white hover:text-[#FF3D00] transition-all text-center">SIGN IN</button></li>
               )}
             </ul>
           </motion.div>

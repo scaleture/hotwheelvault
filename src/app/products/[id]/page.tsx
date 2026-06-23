@@ -6,6 +6,7 @@ import Footer from '@/components/Footer'
 import CartSidebar from '@/components/CartSidebar'
 import ProductGallery from '@/components/ProductGallery'
 import AddToCartButton from '@/components/AddToCartButton'
+import ShareButton from '@/components/ShareButton'
 import { getProductById, getProducts } from '@/lib/products'
 import type { Product } from '@/data/products'
 
@@ -30,9 +31,24 @@ interface Props {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const product = await getProductById(params.id)
   if (!product) return { title: 'Product Not Found — HotWheel Vault' }
+
+  const imageUrl = product.images?.[0] ?? product.image
+
   return {
     title: `${product.name} — HotWheel Vault`,
-    description: product.description?.slice(0, 160) ?? `Shop ${product.name} at HotWheel Vault`,
+    description: product.description?.slice(0, 160) ?? `${product.name} | ${product.series} | ${product.scale}`,
+    openGraph: {
+      title: product.name,
+      description: product.description ?? `${product.series} · ${product.scale} · ₹${product.price}`,
+      images: [{ url: imageUrl, width: 800, height: 600, alt: product.name }],
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: product.name,
+      description: product.description ?? `${product.series} · ₹${product.price}`,
+      images: [imageUrl],
+    },
   }
 }
 
@@ -115,7 +131,14 @@ export default async function ProductDetailPage({ params }: Props) {
               )}
             </div>
 
-            {stock > 0 && <AddToCartButton product={product} />}
+            {stock > 0 && (
+              <div className="flex gap-3 items-center">
+                <div className="flex-1">
+                  <AddToCartButton product={product} />
+                </div>
+                <ShareButton productName={product.name} productId={product.id} />
+              </div>
+            )}
 
             {product.highlights && product.highlights.length > 0 && (
               <div>

@@ -20,6 +20,7 @@ export default function Navbar() {
   const { user, setUser } = useAuthStore()
   const { openAuthModal } = useUIStore()
   const hasMounted = useHasMounted()
+  const [authMounted, setAuthMounted] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [progress, setProgress] = useState(0)
   const [menuOpen, setMenuOpen] = useState(false)
@@ -36,6 +37,8 @@ export default function Navbar() {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  useEffect(() => { setAuthMounted(true) }, [])
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -92,7 +95,9 @@ export default function Navbar() {
             </li>
           ))}
           <li>
-            {user ? (
+            {!authMounted ? (
+              <div className="w-24 h-10" />
+            ) : user ? (
               <div ref={profileRef} className="relative">
                 <button
                   onClick={() => setProfileOpen(!profileOpen)}

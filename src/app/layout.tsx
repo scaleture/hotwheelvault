@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import AuthProvider from '@/components/AuthProvider'
 import AuthModal from '@/components/AuthModal'
+import CartSidebar from '@/components/CartSidebar'
 
 export const metadata: Metadata = {
   title: 'HotWheels Vault — Premium Die-Cast Collection',
@@ -17,8 +18,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <AuthProvider>
-          {children}
           <AuthModal />
+          <CartSidebar />
+          {children}
         </AuthProvider>
       </body>
     </html>

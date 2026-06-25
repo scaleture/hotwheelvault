@@ -3,7 +3,6 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import CartSidebar from '@/components/CartSidebar'
 import ProductGallery from '@/components/ProductGallery'
 import AddToCartButton from '@/components/AddToCartButton'
 import ShareButton from '@/components/ShareButton'
@@ -70,8 +69,6 @@ export default async function ProductDetailPage({ params }: Props) {
   return (
     <main className="bg-[#FAFAF8] min-h-screen">
       <Navbar />
-      <CartSidebar />
-
       <div className="max-w-6xl mx-auto px-4 sm:px-8 pt-28 pb-16">
         <nav className="text-xs tracking-[2px] uppercase font-['Barlow_Condensed'] text-gray-400 mb-8">
           <Link href="/" className="hover:text-[#FF3D00] transition-colors">HOME</Link>

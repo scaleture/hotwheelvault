@@ -9,7 +9,6 @@ import ProductGrid from '@/components/ProductGrid'
 import PromoBanner from '@/components/PromoBanner'
 import TrustBadges from '@/components/TrustBadges'
 import Footer from '@/components/Footer'
-import CartSidebar from '@/components/CartSidebar'
 import { getProducts } from '@/lib/products'
 import ErrorBoundary from '@/components/ErrorBoundary'
 
@@ -88,7 +87,6 @@ export default async function Home() {
 
       <TrustBadges />
       <Footer />
-      <CartSidebar />
     </main>
   )
 }

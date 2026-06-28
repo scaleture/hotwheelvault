@@ -40,7 +40,7 @@ export default function CheckoutPage() {
   const [couponCode, setCouponCode] = useState('')
   const [appliedCoupon, setAppliedCoupon] = useState<{ code: string; discount: number } | null>(null)
   const [couponError, setCouponError] = useState('')
-  const [paymentMethod, setPaymentMethod] = useState('cod')
+  const [paymentMethod] = useState('online')
   const [placing, setPlacing] = useState(false)
   const [orderError, setOrderError] = useState('')
   const [placedOrderId, setPlacedOrderId] = useState<string | null>(null)
@@ -435,28 +435,8 @@ export default function CheckoutPage() {
               </div>
 
               <div className="bg-white border border-gray-200 p-4">
-                <h3 className="font-['Bebas_Neue'] text-xl text-[#1A1A1A] mb-4">PAYMENT METHOD</h3>
-                <div className="space-y-2">
-                  {[
-                    { value: 'cod', label: '🏠 Cash on Delivery' },
-                    { value: 'online', label: '💳 Pay Online (UPI/Card)' },
-                  ].map(pm => (
-                    <button
-                      key={pm.value}
-                      onClick={() => setPaymentMethod(pm.value)}
-                      className={`w-full text-left p-3 border-2 transition-all
-                        ${paymentMethod === pm.value ? 'border-[#FF3D00] bg-[#FF3D00]/5' : 'border-gray-200 hover:border-gray-400'}`}
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center
-                          ${paymentMethod === pm.value ? 'border-[#FF3D00]' : 'border-gray-300'}`}>
-                          {paymentMethod === pm.value && <div className="w-2 h-2 rounded-full bg-[#FF3D00]" />}
-                        </div>
-                        <span className="text-sm font-bold text-[#1A1A1A] font-['Barlow_Condensed']">{pm.label}</span>
-                      </div>
-                    </button>
-                  ))}
-                </div>
+                <h3 className="font-['Bebas_Neue'] text-xl text-[#1A1A1A] mb-2">PAYMENT METHOD</h3>
+                <p className="text-sm text-gray-500 font-['Barlow_Condensed']">💳 Pay Online (UPI/Card)</p>
               </div>
 
               <button

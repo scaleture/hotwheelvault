@@ -1,3 +1,21 @@
+/* ===== CRITICAL: Overflow fixes FIRST ===== */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+  width: 100%;
+}
+
+/* ===== Everything else below ===== */
+
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500;600&display=swap');
 
 @tailwind base;
@@ -15,21 +33,16 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
-  max-width: 100vw;
-  overflow-x: hidden;
 }
 
 body {
   background: var(--bg);
   color: #1A1A1A;
   font-family: 'Barlow', sans-serif;
-  overflow-x: hidden;
-  max-width: 100vw;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -110,33 +123,20 @@ h1, h2, h3 {
   clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
 }
 
-/* ===== Mobile-specific fixes ===== */
-
-/* Fix iOS input zoom — 16px minimum font size prevents auto-zoom on focus */
+/* iOS input zoom fix */
 @media (max-width: 768px) {
   input, select, textarea {
     font-size: 16px !important;
   }
-}
-
-/* Better tap targets on mobile (44px minimum) */
-@media (max-width: 768px) {
   button, a {
     min-height: 44px;
   }
-  button, a, .btn-like {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
 }
 
-/* Fix clip-path buttons on mobile Safari */
+/* Safari clip-path fallback */
 @supports not (clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%)) {
   [style*="clip-path"] {
     clip-path: none !important;
     border-radius: 2px;
   }
 }
-
-

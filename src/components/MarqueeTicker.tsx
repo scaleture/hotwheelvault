@@ -9,14 +9,14 @@ export default function MarqueeTicker() {
   const doubled = [...items, ...items]
 
   return (
-    <div className="bg-gradient-to-r from-[#FF3D00] via-[#FF5500] to-[#FFD700] py-3 overflow-hidden relative">
+    <div className="bg-gradient-to-r from-[#FF3D00] via-[#FF5500] to-[#FFD700] py-2.5 sm:py-3 overflow-hidden relative">
       <div className="absolute inset-0 bg-[length:40px_40px] opacity-10" style={{backgroundImage: 'linear-gradient(45deg, white 25%, transparent 25%, transparent 50%, white 50%, white 75%, transparent 75%)'}} />
       <div className="flex whitespace-nowrap marquee-track relative z-10">
         {doubled.map((item, i) => (
-          <span key={i} className="font-['Bebas_Neue'] text-sm tracking-[4px] 
-            text-white px-8 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]">
+          <span key={i} className="font-['Bebas_Neue'] text-[11px] sm:text-sm tracking-[3px] sm:tracking-[4px] 
+            text-white px-4 sm:px-8 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]">
             {item}
-            <span className="ml-8 text-[#FFD700] drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]">★</span>
+            <span className="ml-4 sm:ml-8 text-[#FFD700] drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]">★</span>
           </span>
         ))}
       </div>

@@ -28,13 +28,27 @@ export default function AccountLayout({ children }: { children: React.ReactNode 
 
   return (
     <div className="min-h-screen bg-[#FAFAF8]">
-      <div className="max-w-5xl mx-auto px-4 sm:px-8 py-24">
-        <h1 className="font-['Bebas_Neue'] text-4xl text-[#1A1A1A] mb-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-8 py-20 sm:py-24">
+        <h1 className="font-['Bebas_Neue'] text-3xl sm:text-4xl text-[#1A1A1A] mb-8">
           MY <span className="text-[#FF3D00]">ACCOUNT</span>
         </h1>
 
-        <div className="flex flex-col md:flex-row gap-8">
-          <aside className="md:w-56 flex-shrink-0">
+        {/* Mobile tab bar */}
+        <div className="flex lg:hidden border-b border-gray-200 mb-6 overflow-x-auto -mx-4 px-4">
+          {SIDEBAR_LINKS.map(tab => (
+            <a key={tab.href} href={tab.href}
+              className={`px-4 py-3 text-xs font-bold tracking-widest uppercase whitespace-nowrap
+                font-['Barlow_Condensed'] border-b-2 transition-colors
+                ${pathname === tab.href
+                  ? 'border-[#FF3D00] text-[#FF3D00]'
+                  : 'border-transparent text-gray-500 hover:text-[#FF3D00]'}`}>
+              {tab.label}
+            </a>
+          ))}
+        </div>
+
+        <div className="flex flex-col lg:flex-row gap-8">
+          <aside className="hidden lg:block w-56 flex-shrink-0">
             <div className="bg-white border border-gray-200 p-6 text-center mb-4">
               <div className="w-14 h-14 rounded-full bg-[#FF3D00] text-white text-xl font-bold flex items-center justify-center mx-auto mb-3">
                 {userInitial}

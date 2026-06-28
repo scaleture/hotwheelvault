@@ -137,7 +137,7 @@ export default function ProductForm({ initialData }: Props) {
         </div>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         <div>
           <label className="block font-['Barlow_Condensed'] text-xs font-bold uppercase tracking-[2px] text-gray-500 mb-2">Name</label>
           <input value={name} onChange={e => setName(e.target.value)} required

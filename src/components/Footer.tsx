@@ -1,11 +1,11 @@
 export default function Footer() {
   return (
-    <footer className="bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] px-6 sm:px-12 pt-14 pb-7 border-t border-[#FF3D00]/20 relative overflow-hidden">
+    <footer className="bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] px-4 sm:px-12 pt-12 sm:pt-14 pb-7 border-t border-[#FF3D00]/20 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-96 h-96 bg-[#FF3D00]/5 rounded-full blur-[100px]" />
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#FFD700]/5 rounded-full blur-[80px]" />
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-14 mb-12">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 md:gap-14 mb-10 sm:mb-12">
         <div>
-          <div className="font-['Bebas_Neue'] text-xl tracking-[3px] bg-gradient-to-r 
+          <div className="font-['Bebas_Neue'] text-lg sm:text-xl tracking-[3px] bg-gradient-to-r 
             from-[#FF3D00] to-[#FFD700] bg-clip-text text-transparent mb-4">
             🔥 HOTWHEEL VAULT
           </div>
@@ -35,10 +35,10 @@ export default function Footer() {
       </div>
 
       {/* Newsletter */}
-      <div className="mb-12 pt-7 border-t border-white/10">
+      <div className="mb-10 sm:mb-12 pt-7 border-t border-white/10">
         <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-10">
           <div className="text-center sm:text-left">
-            <h3 className="font-['Bebas_Neue'] text-xl text-white tracking-[2px]">
+            <h3 className="font-['Bebas_Neue'] text-lg sm:text-xl text-white tracking-[2px]">
               JOIN THE COLLECTOR'S CIRCLE
             </h3>
             <p className="text-xs text-white/30 mt-1">
@@ -53,7 +53,7 @@ export default function Footer() {
                 px-4 py-3 text-sm flex-1 sm:w-[240px] outline-none focus:border-[#FF3D00] transition-colors"
             />
             <button
-              className="bg-[#FF3D00] text-white px-6 py-3 text-sm font-bold tracking-widest 
+              className="bg-[#FF3D00] text-white px-5 sm:px-6 py-3 text-xs sm:text-sm font-bold tracking-widest 
                 uppercase font-['Barlow_Condensed'] hover:bg-[#FF5500] transition-all whitespace-nowrap"
               style={{ clipPath: 'polygon(4px 0, 100% 0, calc(100% - 4px) 100%, 0 100%)' }}
             >
@@ -64,11 +64,11 @@ export default function Footer() {
       </div>
 
       <div className="flex flex-col md:flex-row gap-4 justify-between items-center pt-7 border-t border-white/10">
-        <p className="text-[11px] text-white/30 text-center md:text-left">
+        <p className="text-[10px] sm:text-[11px] text-white/30 text-center md:text-left">
           © 2024 HotWheel Vault. Hot Wheels® is a trademark of Mattel, Inc. Not affiliated with Mattel.
         </p>
-        <div className="flex gap-2 justify-center">
-          {['UPI', 'VISA', 'MC', 'RUPAY', 'COD'].map(p => (
+        <div className="flex flex-wrap gap-2 justify-center">
+          {['UPI', 'VISA', 'MC', 'RUPAY'].map(p => (
             <span key={p} className="bg-white/10 px-3 py-1 text-[10px] 
               text-white/50 tracking-wider font-semibold border border-white/10">{p}</span>
           ))}

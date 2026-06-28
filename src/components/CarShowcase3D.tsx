@@ -68,16 +68,16 @@ export default function CarShowcase3D() {
 
   return (
     // RULE: All HTML is OUTSIDE Canvas
-    <div className="relative w-full h-[520px] bg-white border border-gray-200 shadow-sm">
+    <div className="relative w-full h-[320px] sm:h-[520px] bg-white border border-gray-200 shadow-sm">
       
       {/* Model selector buttons — OUTSIDE Canvas */}
-      <div className="absolute top-4 left-4 z-10 flex gap-2">
+      <div className="absolute top-4 left-4 z-10 flex gap-2 overflow-x-auto max-w-[calc(100%-2rem)] pb-1">
         {CAR_MODELS.map(car => (
           <button
             key={car.id}
             onClick={() => setActiveModel(car)}
-            className={`px-3 py-1 text-xs font-['Barlow_Condensed'] font-bold 
-              tracking-widest uppercase transition-all
+            className={`px-3 py-1 text-[10px] sm:text-xs font-['Barlow_Condensed'] font-bold 
+              tracking-widest uppercase transition-all whitespace-nowrap
               ${activeModel.id === car.id 
                 ? 'bg-[#FF3D00] text-white' 
                 : 'bg-gray-100 text-gray-500 hover:bg-gray-200'}`}
@@ -88,7 +88,7 @@ export default function CarShowcase3D() {
       </div>
 
       {/* Hint text — OUTSIDE Canvas */}
-      <div className="absolute bottom-4 right-4 z-10 text-gray-400 text-xs 
+      <div className="hidden sm:block absolute bottom-4 right-4 z-10 text-gray-400 text-xs 
         tracking-widest uppercase font-['Barlow_Condensed']">
         Drag to rotate · Scroll to zoom
       </div>

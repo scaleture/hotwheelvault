@@ -162,18 +162,18 @@ export default function CheckoutPage() {
   }
 
   const renderStepIndicator = () => (
-    <div className="flex items-center justify-center gap-0 mb-10">
+    <div className="flex items-center justify-center gap-2 mb-8">
       {STEPS.map((label, i) => (
-        <div key={i} className="flex items-center">
-          <div className={`flex items-center gap-2 px-4 py-2 text-xs font-bold tracking-[2px] uppercase
-            font-['Barlow_Condensed'] ${i <= step ? 'text-[#FF3D00]' : 'text-gray-300'}`}>
-            <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs
-              ${i <= step ? 'bg-[#FF3D00] text-white' : 'bg-gray-200 text-gray-500'}`}>
-              {i + 1}
-            </span>
-            {label}
+        <div key={i} className="flex items-center gap-2">
+          <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold
+            ${i < step ? 'bg-green-500 text-white' : i === step ? 'bg-[#FF3D00] text-white' : 'bg-gray-200 text-gray-500'}`}>
+            {i < step ? '✓' : i + 1}
           </div>
-          {i < STEPS.length - 1 && <div className={`w-12 h-px ${i < step ? 'bg-[#FF3D00]' : 'bg-gray-200'}`} />}
+          <span className={`text-[10px] sm:text-xs font-['Barlow_Condensed'] tracking-wider uppercase
+            ${i === step ? 'text-[#FF3D00]' : 'hidden sm:block text-gray-400'}`}>
+            {label}
+          </span>
+          {i < STEPS.length - 1 && <div className={`w-6 sm:w-12 h-px ${i < step ? 'bg-[#FF3D00]' : 'bg-gray-200'}`} />}
         </div>
       ))}
     </div>
@@ -182,14 +182,14 @@ export default function CheckoutPage() {
   if (placedOrderId) {
     return (
       <div className="min-h-screen bg-[#E8F5E9] flex items-center justify-center">
-        <div className="text-center max-w-md px-8">
-          <div className="w-20 h-20 rounded-full bg-green-500 flex items-center justify-center mx-auto mb-6"
+        <div className="text-center max-w-md px-6 sm:px-8">
+          <div className="w-16 sm:w-20 h-16 sm:h-20 rounded-full bg-green-500 flex items-center justify-center mx-auto mb-6"
             style={{ animation: 'none' }}>
-            <svg className="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+            <svg className="w-8 sm:w-10 h-8 sm:h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h1 className="font-['Bebas_Neue'] text-4xl text-[#1A1A1A] mb-2">
+          <h1 className="font-['Bebas_Neue'] text-3xl sm:text-4xl text-[#1A1A1A] mb-2">
             ORDER PLACED! <span className="text-[#FF3D00]">🎉</span>
           </h1>
           <p className="font-mono text-sm text-gray-500 mb-2">
@@ -198,15 +198,15 @@ export default function CheckoutPage() {
           <p className="text-gray-400 text-xs mb-8">
             You&apos;ll receive updates on your registered email
           </p>
-          <div className="flex gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link href="/account/orders"
               className="bg-[#FF3D00] text-white px-6 py-3 text-sm font-bold tracking-[3px] uppercase
-                font-['Barlow_Condensed'] hover:bg-[#FF5500] transition-all">
+                font-['Barlow_Condensed'] hover:bg-[#FF5500] transition-all text-center">
               TRACK MY ORDER
             </Link>
             <Link href="/"
               className="border border-gray-300 text-gray-600 px-6 py-3 text-sm font-bold tracking-[3px]
-                uppercase font-['Barlow_Condensed'] hover:border-[#FF3D00] hover:text-[#FF3D00] transition-all">
+                uppercase font-['Barlow_Condensed'] hover:border-[#FF3D00] hover:text-[#FF3D00] transition-all text-center">
               CONTINUE SHOPPING
             </Link>
           </div>
@@ -217,13 +217,13 @@ export default function CheckoutPage() {
 
   return (
     <div className="min-h-screen bg-[#E8F5E9]">
-      <div className="max-w-4xl mx-auto px-4 sm:px-8 py-24">
+      <div className="max-w-4xl mx-auto px-4 sm:px-8 py-20 sm:py-24">
         <Link href="/" className="text-gray-400 text-xs tracking-[2px] uppercase font-['Barlow_Condensed']
           hover:text-[#FF3D00] transition-colors mb-6 inline-block">
           ← BACK TO SHOP
         </Link>
 
-        <h1 className="font-['Bebas_Neue'] text-4xl text-[#1A1A1A] mb-8">
+        <h1 className="font-['Bebas_Neue'] text-3xl sm:text-4xl text-[#1A1A1A] mb-8">
           CHECK<span className="text-[#FF3D00]">OUT</span>
         </h1>
 
@@ -251,8 +251,8 @@ export default function CheckoutPage() {
                       ${selectedAddressId === addr.id ? 'border-[#FF3D00]' : 'border-gray-300'}`}>
                       {selectedAddressId === addr.id && <div className="w-2 h-2 rounded-full bg-[#FF3D00]" />}
                     </div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 flex-wrap">
                         <span className="text-[10px] uppercase tracking-wider font-bold text-[#FF3D00] bg-[#FF3D00]/10 px-2 py-0.5">
                           {addr.label}
                         </span>
@@ -268,13 +268,13 @@ export default function CheckoutPage() {
             </div>
 
             {showNewAddress ? (
-              <div className="bg-white border border-gray-200 p-6 mb-6 space-y-4">
+              <div className="bg-white border border-gray-200 p-4 sm:p-6 mb-6 space-y-4">
                 <h3 className="font-['Barlow_Condensed'] text-sm font-bold uppercase tracking-wider">New Address</h3>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="text-xs text-gray-500 uppercase tracking-wider font-['Barlow_Condensed']">Label</label>
                     <select value={newAddr.label} onChange={e => setNewAddr({ ...newAddr, label: e.target.value })}
-                      className="w-full border border-gray-200 px-3 py-2 text-sm focus:border-[#FF3D00] outline-none mt-1">
+                      className="w-full border border-gray-200 px-3 py-2.5 text-sm focus:border-[#FF3D00] outline-none mt-1">
                       <option>Home</option>
                       <option>Work</option>
                       <option>Other</option>
@@ -283,37 +283,37 @@ export default function CheckoutPage() {
                   <div>
                     <label className="text-xs text-gray-500 uppercase tracking-wider font-['Barlow_Condensed']">Full Name</label>
                     <input value={newAddr.full_name} onChange={e => setNewAddr({ ...newAddr, full_name: e.target.value })}
-                      className="w-full border border-gray-200 px-3 py-2 text-sm focus:border-[#FF3D00] outline-none mt-1" />
+                      className="w-full border border-gray-200 px-3 py-2.5 text-sm focus:border-[#FF3D00] outline-none mt-1" />
                   </div>
                   <div>
                     <label className="text-xs text-gray-500 uppercase tracking-wider font-['Barlow_Condensed']">Phone</label>
                     <input value={newAddr.phone} onChange={e => setNewAddr({ ...newAddr, phone: e.target.value })}
-                      className="w-full border border-gray-200 px-3 py-2 text-sm focus:border-[#FF3D00] outline-none mt-1" />
+                      className="w-full border border-gray-200 px-3 py-2.5 text-sm focus:border-[#FF3D00] outline-none mt-1" />
                   </div>
                   <div>
                     <label className="text-xs text-gray-500 uppercase tracking-wider font-['Barlow_Condensed']">Pincode</label>
                     <input value={newAddr.pincode} onChange={e => setNewAddr({ ...newAddr, pincode: e.target.value })}
-                      className="w-full border border-gray-200 px-3 py-2 text-sm focus:border-[#FF3D00] outline-none mt-1" />
+                      className="w-full border border-gray-200 px-3 py-2.5 text-sm focus:border-[#FF3D00] outline-none mt-1" />
                   </div>
                   <div className="col-span-2">
                     <label className="text-xs text-gray-500 uppercase tracking-wider font-['Barlow_Condensed']">Address Line 1</label>
                     <input value={newAddr.line1} onChange={e => setNewAddr({ ...newAddr, line1: e.target.value })}
-                      className="w-full border border-gray-200 px-3 py-2 text-sm focus:border-[#FF3D00] outline-none mt-1" />
+                      className="w-full border border-gray-200 px-3 py-2.5 text-sm focus:border-[#FF3D00] outline-none mt-1" />
                   </div>
                   <div className="col-span-2">
                     <label className="text-xs text-gray-500 uppercase tracking-wider font-['Barlow_Condensed']">Address Line 2 (optional)</label>
                     <input value={newAddr.line2} onChange={e => setNewAddr({ ...newAddr, line2: e.target.value })}
-                      className="w-full border border-gray-200 px-3 py-2 text-sm focus:border-[#FF3D00] outline-none mt-1" />
+                      className="w-full border border-gray-200 px-3 py-2.5 text-sm focus:border-[#FF3D00] outline-none mt-1" />
                   </div>
                   <div>
                     <label className="text-xs text-gray-500 uppercase tracking-wider font-['Barlow_Condensed']">City</label>
                     <input value={newAddr.city} onChange={e => setNewAddr({ ...newAddr, city: e.target.value })}
-                      className="w-full border border-gray-200 px-3 py-2 text-sm focus:border-[#FF3D00] outline-none mt-1" />
+                      className="w-full border border-gray-200 px-3 py-2.5 text-sm focus:border-[#FF3D00] outline-none mt-1" />
                   </div>
                   <div>
                     <label className="text-xs text-gray-500 uppercase tracking-wider font-['Barlow_Condensed']">State</label>
                     <input value={newAddr.state} onChange={e => setNewAddr({ ...newAddr, state: e.target.value })}
-                      className="w-full border border-gray-200 px-3 py-2 text-sm focus:border-[#FF3D00] outline-none mt-1" />
+                      className="w-full border border-gray-200 px-3 py-2.5 text-sm focus:border-[#FF3D00] outline-none mt-1" />
                   </div>
                 </div>
                 <div className="flex gap-3 pt-2">
@@ -350,22 +350,22 @@ export default function CheckoutPage() {
 
         {/* Step 2: Review */}
         {step === 1 && (
-          <div className="grid md:grid-cols-5 gap-8">
+          <div className="grid md:grid-cols-5 gap-6 sm:gap-8">
             <div className="md:col-span-3 space-y-4">
-              <h2 className="font-['Bebas_Neue'] text-2xl text-[#1A1A1A] mb-4">
+              <h2 className="font-['Bebas_Neue'] text-xl sm:text-2xl text-[#1A1A1A] mb-4">
                 ORDER <span className="text-[#FF3D00]">ITEMS</span>
               </h2>
               {items.map(item => (
-                <div key={item.id} className="flex gap-4 bg-white p-4 border border-gray-200">
-                  <div className="relative w-16 h-16 bg-[#F5F5F0] flex-shrink-0">
+                <div key={item.id} className="flex gap-3 sm:gap-4 bg-white p-3 sm:p-4 border border-gray-200">
+                  <div className="relative w-14 h-14 sm:w-16 sm:h-16 bg-[#F5F5F0] flex-shrink-0">
                     <Image src={item.image} alt={item.name} fill sizes="64px" className="object-contain p-1" />
                   </div>
-                  <div className="flex-1">
-                    <div className="font-['Barlow_Condensed'] text-sm font-bold text-[#1A1A1A]">{item.name}</div>
-                    <div className="font-['Bebas_Neue'] text-lg text-[#FF3D00]">₹{item.price}</div>
+                  <div className="flex-1 min-w-0">
+                    <div className="font-['Barlow_Condensed'] text-sm font-bold text-[#1A1A1A] truncate">{item.name}</div>
+                    <div className="font-['Bebas_Neue'] text-base sm:text-lg text-[#FF3D00]">₹{item.price}</div>
                     <div className="text-xs text-gray-400">Qty: {item.qty}</div>
                   </div>
-                  <div className="font-['Bebas_Neue'] text-lg text-[#1A1A1A]">₹{(item.price * item.qty).toLocaleString('en-IN')}</div>
+                  <div className="font-['Bebas_Neue'] text-base sm:text-lg text-[#1A1A1A] flex-shrink-0">₹{(item.price * item.qty).toLocaleString('en-IN')}</div>
                 </div>
               ))}
 
@@ -388,11 +388,11 @@ export default function CheckoutPage() {
 
             <div className="md:col-span-2 space-y-4">
               <div className="bg-white border border-gray-200 p-4">
-                <h3 className="font-['Bebas_Neue'] text-xl text-[#1A1A1A] mb-4">COUPON</h3>
+                <h3 className="font-['Bebas_Neue'] text-lg sm:text-xl text-[#1A1A1A] mb-4">COUPON</h3>
                 <div className="flex gap-2">
                   <input value={couponCode} onChange={e => setCouponCode(e.target.value)}
                     placeholder="Enter coupon code"
-                    className="flex-1 border border-gray-200 px-3 py-2 text-sm focus:border-[#FF3D00] outline-none uppercase" />
+                    className="flex-1 border border-gray-200 px-3 py-2.5 text-sm focus:border-[#FF3D00] outline-none uppercase" />
                   <button onClick={handleApplyCoupon}
                     className="bg-[#1A1A1A] text-white px-4 text-xs font-bold tracking-[2px] uppercase
                       font-['Barlow_Condensed'] hover:bg-[#FF3D00] transition-all">
@@ -410,7 +410,7 @@ export default function CheckoutPage() {
               </div>
 
               <div className="bg-white border border-gray-200 p-4">
-                <h3 className="font-['Bebas_Neue'] text-xl text-[#1A1A1A] mb-4">ORDER TOTAL</h3>
+                <h3 className="font-['Bebas_Neue'] text-lg sm:text-xl text-[#1A1A1A] mb-4">ORDER TOTAL</h3>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between text-gray-500">
                     <span>Subtotal</span>
@@ -427,7 +427,7 @@ export default function CheckoutPage() {
                     </div>
                   )}
                   <hr className="border-gray-200" />
-                  <div className="flex justify-between font-['Bebas_Neue'] text-2xl text-[#1A1A1A]">
+                  <div className="flex justify-between font-['Bebas_Neue'] text-xl sm:text-2xl text-[#1A1A1A]">
                     <span>Total</span>
                     <span className="text-[#FF3D00]">₹{total.toLocaleString('en-IN')}</span>
                   </div>
@@ -435,14 +435,14 @@ export default function CheckoutPage() {
               </div>
 
               <div className="bg-white border border-gray-200 p-4">
-                <h3 className="font-['Bebas_Neue'] text-xl text-[#1A1A1A] mb-2">PAYMENT METHOD</h3>
-                <p className="text-sm text-gray-500 font-['Barlow_Condensed']">💳 Pay Online (UPI/Card)</p>
+                <h3 className="font-['Bebas_Neue'] text-lg sm:text-xl text-[#1A1A1A] mb-2">PAYMENT METHOD</h3>
+                <p className="text-xs sm:text-sm text-gray-500 font-['Barlow_Condensed']">💳 Pay Online (UPI/Card)</p>
               </div>
 
               <button
                 onClick={handlePlaceOrder}
                 disabled={placing}
-                className="w-full bg-[#FF3D00] text-white py-4 font-['Bebas_Neue'] text-xl tracking-[3px]
+                className="w-full bg-[#FF3D00] text-white py-4 font-['Bebas_Neue'] text-lg sm:text-xl tracking-[3px]
                   hover:bg-[#FF5500] transition-all hover:-translate-y-0.5 active:scale-[0.98]
                   disabled:opacity-40 disabled:cursor-not-allowed"
                 style={{ clipPath: 'polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%)' }}
@@ -461,5 +461,3 @@ export default function CheckoutPage() {
     </div>
   )
 }
-
-

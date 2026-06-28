@@ -31,8 +31,10 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
   const { addItem } = useCartStore()
   const [showToast, setShowToast] = useState(false)
 
+  const isTouchDevice = () => window.matchMedia('(hover: none)').matches
+
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return
+    if (isTouchDevice() || !cardRef.current) return
     const rect = cardRef.current.getBoundingClientRect()
     const x = (e.clientX - rect.left) / rect.width - 0.5
     const y = (e.clientY - rect.top) / rect.height - 0.5
@@ -80,13 +82,13 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
           </span>
         )}
 
-        <div className="h-[210px] relative bg-gradient-to-br from-[#FFF5F0] to-[#FFFDF0] overflow-hidden">
+        <div className="h-[160px] sm:h-[210px] relative bg-gradient-to-br from-[#FFF5F0] to-[#FFFDF0] overflow-hidden">
           <Image
             src={product.image}
             alt={product.name}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-            className="object-contain p-4 transition-transform duration-500 
+            className="object-contain p-3 sm:p-4 transition-transform duration-500 
               group-hover:scale-110 group-hover:-translate-y-1"
           />
           <div className="absolute bottom-0 left-0 right-0 h-16 
@@ -109,18 +111,18 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
           )}
         </div>
 
-        <div className="p-4">
+        <div className="p-3 sm:p-4">
           <div className="text-[10px] tracking-[2px] uppercase text-[#FF3D00] font-semibold mb-1 
             font-['Barlow_Condensed']">
             {product.series}
           </div>
-          <div className="text-lg font-bold text-[#1A1A1A] font-['Barlow_Condensed'] mb-1">
+          <div className="text-base sm:text-lg font-bold text-[#1A1A1A] font-['Barlow_Condensed'] mb-1">
             {product.name}
           </div>
-          <div className="text-[11px] text-gray-400 mb-4">{product.scale}</div>
+          <div className="text-[11px] text-gray-400 mb-3 sm:mb-4">{product.scale}</div>
 
           <div className="flex items-center justify-between">
-            <div className="font-['Bebas_Neue'] text-2xl text-[#1A1A1A] flex items-baseline gap-2">
+            <div className="font-['Bebas_Neue'] text-xl sm:text-2xl text-[#1A1A1A] flex items-baseline gap-2">
               {product.oldPrice && (
                 <span className="text-sm text-gray-400 line-through font-['Barlow'] font-normal">
                   ₹{product.oldPrice}
@@ -132,7 +134,7 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
         </div>
       </Link>
 
-      <div className="px-4 pb-4">
+      <div className="px-3 sm:px-4 pb-3 sm:pb-4">
         <button
           onClick={handleAddToCart}
           className="w-full bg-[#FF3D00] text-white py-3 text-sm font-bold tracking-[2px]

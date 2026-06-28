@@ -9,9 +9,9 @@ const CATEGORIES = [
 
 export default function CategoryStrip() {
   return (
-    <div className="bg-gradient-to-r from-[#FF3D00]/5 via-[#FFD700]/5 to-[#FF3D00]/5 px-6 sm:px-12 py-10 relative overflow-hidden">
+    <div className="bg-gradient-to-r from-[#FF3D00]/5 via-[#FFD700]/5 to-[#FF3D00]/5 px-4 sm:px-12 py-8 sm:py-10 relative overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[200px] bg-[#FF3D00]/8 rounded-full blur-[100px]" />
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 relative z-10">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4 relative z-10">
         {CATEGORIES.map(cat => (
           <button
             key={cat.name}
@@ -24,9 +24,9 @@ export default function CategoryStrip() {
             <img src={cat.img} alt={cat.name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
             <div className="relative z-10 flex flex-col items-center gap-1">
-              <span className="font-['Barlow_Condensed'] text-xs font-bold tracking-[2px] 
+              <span className="font-['Barlow_Condensed'] text-[10px] sm:text-xs font-bold tracking-[2px] 
                 uppercase text-white drop-shadow-lg">{cat.name}</span>
-              <span className="text-[10px] text-white/80 drop-shadow">{cat.count}</span>
+              <span className="text-[9px] sm:text-[10px] text-white/80 drop-shadow">{cat.count}</span>
             </div>
           </button>
         ))}

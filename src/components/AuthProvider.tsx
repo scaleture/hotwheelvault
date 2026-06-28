@@ -26,8 +26,28 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
       setUser(data.session?.user ?? null)
     })
 
-    const { data: { subscription } } = supabaseBrowser.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabaseBrowser.auth.onAuthStateChange(async (_event, session) => {
       setUser(session?.user ?? null)
+
+      if (session?.user) {
+        const { data: existing } = await supabaseBrowser
+          .from('profiles')
+          .select('id')
+          .eq('id', session.user.id)
+          .single()
+
+        if (!existing) {
+          const fullName = session.user.user_metadata?.full_name
+            ?? session.user.user_metadata?.name
+            ?? session.user.email?.split('@')[0]
+            ?? ''
+
+          await supabaseBrowser.from('profiles').upsert({
+            id: session.user.id,
+            full_name: fullName,
+          })
+        }
+      }
     })
 
     return () => subscription.unsubscribe()

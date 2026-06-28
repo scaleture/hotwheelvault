@@ -72,12 +72,12 @@ export default function CheckoutPage() {
   useEffect(() => { if (user) loadAddresses() }, [user, loadAddresses])
 
   useEffect(() => {
-    if (!user || !items.length) {
+    if (!items.length) {
       router.replace('/')
     }
-  }, [user, items, router])
+  }, [items, router])
 
-  if (!user || items.length === 0) return null
+  if (items.length === 0) return null
 
   async function handleSaveAddress() {
     if (!user) return
